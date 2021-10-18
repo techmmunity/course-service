@@ -2,6 +2,8 @@ import { ResourceTypeEnum } from "v1/enums/resource-type";
 import { SeniorityEnum } from "v1/enums/seniority";
 
 class V1CreateCourseEpisodeQuizAnswerInputSchema {
+	public id: string;
+
 	public answer: string;
 }
 

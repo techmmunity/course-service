@@ -1,10 +1,10 @@
-import { PrimaryGeneratedColumn, Column, Entity } from "@techmmunity/symbiosis";
+import { Column, Entity } from "@techmmunity/symbiosis";
 
 @Entity({
 	isSubEntity: true,
 })
 export class AnswerEntity {
-	@PrimaryGeneratedColumn()
+	@Column()
 	public id: string;
 
 	@Column()

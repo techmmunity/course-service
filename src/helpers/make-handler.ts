@@ -12,6 +12,8 @@ const bootstrap = async (module: any): Promise<Handler> => {
 
 	nestApp.enableCors();
 
+	nestApp.enableVersioning();
+
 	await nestApp.init();
 
 	const expressApp = nestApp.getHttpAdapter().getInstance();

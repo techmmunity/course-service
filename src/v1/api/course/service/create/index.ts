@@ -11,9 +11,9 @@ export const create = async (
 	{ courseRepository }: Injectables,
 	params: V1CreateCourseInputSchema,
 ) => {
-	// Const data = await validate(params);
+	const data = await validate(params);
 
-	const result = (await courseRepository.save(params)) as CourseEntity;
+	const result = (await courseRepository.save(data)) as CourseEntity;
 
 	return {
 		courseId: result.id,

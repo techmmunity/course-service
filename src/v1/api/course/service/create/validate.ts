@@ -74,6 +74,7 @@ const schema = yup
 											.required()
 											.of(
 												yup.object().strict().required().shape({
+													id: episodes.quizzes.answers.id.required(),
 													answer: episodes.quizzes.answers.answer.required(),
 												}),
 											)
