@@ -3,3 +3,5 @@
  *
  * Used to configure Jest
  */
+
+import "reflect-metadata";

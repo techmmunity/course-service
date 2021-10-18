@@ -5,7 +5,7 @@ import { v1 } from "./src/v1";
 import type { AWS } from "@serverless/typescript";
 
 const serverlessConfiguration: AWS = {
-	service: "base-project-serverless",
+	service: "course-service",
 	frameworkVersion: "2",
 	useDotenv: true,
 	package: {
@@ -16,7 +16,6 @@ const serverlessConfiguration: AWS = {
 			webpackConfig: "./webpack.config.js",
 			includeModules: true,
 		},
-		optimize: ["swagger-ui-dist"]
 	},
 	plugins: ["serverless-webpack", "serverless-offline"],
 	provider: {
@@ -28,6 +27,8 @@ const serverlessConfiguration: AWS = {
 		},
 		environment: {
 			AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+			DYNAMODB_ACCESS_KEY_ID: process.env.DYNAMODB_ACCESS_KEY_ID!,
+			DYNAMODB_SECRET_ACCESS_KEY: process.env.DYNAMODB_SECRET_ACCESS_KEY!,
 		},
 		lambdaHashingVersion: "20201221",
 	},

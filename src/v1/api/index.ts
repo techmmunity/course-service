@@ -1,3 +1,3 @@
-import { ExampleModule } from "./example/example.module";
+import { CourseModule } from "./course/course.module";
 
-export const API = [ExampleModule];
+export const API = [CourseModule];

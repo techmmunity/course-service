@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NestFactory } from "@nestjs/core";
 import serverlessExpress from "@vendia/serverless-express";
 import type { Handler } from "aws-lambda";
@@ -6,7 +7,7 @@ let cachedServer: Handler;
 
 const isWarmUp = (event: any) => event.source === "serverless-plugin-warmup";
 
-const bootstrap = async (module: any, version: string): Promise<Handler> => {
+const bootstrap = async (module: any): Promise<Handler> => {
 	const nestApp = await NestFactory.create(module);
 
 	nestApp.enableCors();
@@ -19,7 +20,7 @@ const bootstrap = async (module: any, version: string): Promise<Handler> => {
 };
 
 export const makeHandler =
-	(module: any, version: string): Handler =>
+	(module: any): Handler =>
 	async (event, context, callback) => {
 		// https://github.com/vendia/serverless-express/issues/86
 		event.path = event.pathParameters.proxy;
@@ -35,7 +36,7 @@ export const makeHandler =
 
 		if (!cachedServer) {
 			// eslint-disable-next-line require-atomic-updates
-			cachedServer = await bootstrap(module, version);
+			cachedServer = await bootstrap(module);
 		}
 
 		return cachedServer(event, context, callback);
