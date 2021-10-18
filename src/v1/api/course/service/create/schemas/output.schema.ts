@@ -1,3 +1,3 @@
 export class V1CreateCourseOutputSchema {
-	public thisIsAnParam: string;
+	public courseId: string;
 }

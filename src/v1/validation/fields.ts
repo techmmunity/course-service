@@ -17,6 +17,7 @@ export const fields = {
 	id,
 	name: title,
 	description: string.min(10).max(5000),
+	previewImageUrl: string.url(),
 	mustKnowBefore: array.of(string.uuid()).max(5),
 	whereToGoAfter: array.of(string.uuid()).max(5),
 	available: boolean,

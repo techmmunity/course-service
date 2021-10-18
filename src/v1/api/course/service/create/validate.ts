@@ -15,6 +15,7 @@ const schema = yup
 	.shape({
 		name: fields.name.required(),
 		description: fields.description.required(),
+		previewImageUrl: fields.previewImageUrl.notRequired(),
 		mustKnowBefore: fields.mustKnowBefore.notRequired(),
 		whereToGoAfter: fields.whereToGoAfter.notRequired(),
 		available: fields.available.notRequired(),

@@ -52,6 +52,8 @@ export class V1CreateCourseInputSchema {
 
 	public description: string;
 
+	public previewImageUrl?: string;
+
 	public mustKnowBefore?: Array<string>;
 
 	public whereToGoAfter?: Array<string>;

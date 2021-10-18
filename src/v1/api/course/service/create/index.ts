@@ -1,4 +1,4 @@
-import { CourseRepository } from "v1/entities/course";
+import { CourseEntity, CourseRepository } from "v1/entities/course";
 import { V1CreateCourseInputSchema } from "./schemas/input.schema";
 
 import { validate } from "./validate";
@@ -11,7 +11,11 @@ export const create = async (
 	{ courseRepository }: Injectables,
 	params: V1CreateCourseInputSchema,
 ) => {
-	const data = await validate(params);
+	// Const data = await validate(params);
 
-	return courseRepository.save(data);
+	const result = (await courseRepository.save(params)) as CourseEntity;
+
+	return {
+		courseId: result.id,
+	};
 };

@@ -20,6 +20,9 @@ export class CourseEntity {
 	@Column()
 	public description: string;
 
+	@Column()
+	public previewImageUrl?: string;
+
 	@Column({
 		type: String,
 		comment: "Array of courses to do BEFORE this one",
@@ -31,12 +34,6 @@ export class CourseEntity {
 		comment: "Array of courses to do AFTER this one",
 	})
 	public whereToGoAfter?: Array<string>;
-
-	@Column()
-	public workload: number;
-
-	@Column()
-	public quizCount: number;
 
 	@SaveDateColumn({
 		comment: "ISO Date",
