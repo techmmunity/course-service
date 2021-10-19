@@ -4,17 +4,26 @@ import {
 	PrimaryGeneratedColumn,
 	SaveDateColumn,
 	UpdateDateColumn,
+	PrimaryColumn,
+	Repository,
 } from "@techmmunity/symbiosis";
-import { QuizEntity } from "./quiz";
-import { ResourceEntity } from "./resource";
-import { VideoEntity } from "./video";
+import { QuizEntity } from "./quiz.entity";
+import { ResourceEntity } from "./resource.entity";
+import { VideoEntity } from "./video.entity";
 
 @Entity({
 	isSubEntity: true,
 })
 export class EpisodeEntity {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn({
+		extras: {
+			sortKey: true,
+		},
+	})
 	public id: string;
+
+	@PrimaryColumn()
+	public courseId: string;
 
 	@Column()
 	public name: string;
@@ -47,3 +56,5 @@ export class EpisodeEntity {
 	@Column(QuizEntity)
 	public quizzes: Array<QuizEntity>;
 }
+
+export type EpisodeRepository = Repository<EpisodeEntity>;

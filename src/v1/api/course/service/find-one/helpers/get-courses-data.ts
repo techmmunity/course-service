@@ -1,4 +1,4 @@
-import { CourseEntity, CourseRepository } from "v1/entities/course";
+import { CourseEntity, CourseRepository } from "v1/api/course/course.entity";
 
 interface GetCoursesDataParams {
 	courseRepository: CourseRepository;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import { fields } from "v1/validation/fields";
+import { fields, quiz } from "v1/validation/fields";
 import { V1CreateCourseInputSchema } from "./schemas/input.schema";
 
 import { makeValidate } from "v1/validation/validate";
@@ -20,8 +20,8 @@ const schema = yup
 		whereToGoAfter: fields.whereToGoAfter.notRequired(),
 		available: fields.available.notRequired(),
 		seniority: fields.seniority.required(),
-		toolkit: fields.toolkit.required().min(1),
-		tags: fields.tags.required().min(1),
+		toolkit: fields.toolkit.required(),
+		tags: fields.tags.required(),
 		episodes: yup
 			.array()
 			.strict()
@@ -54,33 +54,7 @@ const schema = yup
 									type: episodes.resources.type.required(),
 								}),
 							),
-						quizzes: yup
-							.array()
-							.strict()
-							.required()
-							.of(
-								yup
-									.object()
-									.strict()
-									.required()
-									.shape({
-										question: episodes.quizzes.question.required(),
-										rightAnswerId: episodes.quizzes.rightAnswerId.required(),
-										shortDescription:
-											episodes.quizzes.shortDescription.required(),
-										answers: yup
-											.array()
-											.strict()
-											.required()
-											.of(
-												yup.object().strict().required().shape({
-													id: episodes.quizzes.answers.id.required(),
-													answer: episodes.quizzes.answers.answer.required(),
-												}),
-											)
-											.min(2),
-									}),
-							),
+						quizzes: yup.array().strict().required().of(quiz),
 					}),
 			),
 	});

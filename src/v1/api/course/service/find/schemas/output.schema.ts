@@ -1,4 +1,4 @@
-import { CourseEntity } from "v1/entities/course";
+import { CourseEntity } from "v1/api/course/course.entity";
 
 type ColumnsToPick =
 	| "description"
@@ -9,4 +9,4 @@ type ColumnsToPick =
 	| "seniority"
 	| "toolkit";
 
-export type V1CreateCourseOutputSchema = Pick<CourseEntity, ColumnsToPick>;
+export type V1FindCourseOutputSchema = Pick<CourseEntity, ColumnsToPick>;

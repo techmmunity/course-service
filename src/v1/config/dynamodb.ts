@@ -5,25 +5,14 @@ import {
 } from "@techmmunity/symbiosis-dynamodb";
 
 import { DynamicModule } from "@nestjs/common";
-import { CourseEntity } from "v1/entities/course";
-import { AnswerEntity } from "v1/entities/answer";
-import { EpisodeEntity } from "v1/entities/episode";
-import { QuizEntity } from "v1/entities/quiz";
-import { ResourceEntity } from "v1/entities/resource";
-import { VideoEntity } from "v1/entities/video";
+import { EpisodeEntity } from "v1/api/episode/entities/episode.entity";
+import { CourseEntity } from "v1/api/course/course.entity";
 
 const { DYNAMODB_ACCESS_KEY_ID, DYNAMODB_SECRET_ACCESS_KEY } = process.env;
 
 export const DYNAMO_CONNECT: DynamicModule =
 	SymbiosisModule.forRoot<DynamoDbConnectionOptions>(DynamodbConnection, {
-		entities: [
-			AnswerEntity,
-			CourseEntity,
-			EpisodeEntity,
-			QuizEntity,
-			ResourceEntity,
-			VideoEntity,
-		],
+		entities: [CourseEntity, EpisodeEntity],
 		namingStrategy: {
 			entity: "snake_case",
 			column: "camelCase",

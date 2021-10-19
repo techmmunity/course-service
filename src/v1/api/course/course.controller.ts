@@ -9,20 +9,20 @@ import { API_VERSION } from "v1/config";
 	version: API_VERSION,
 })
 export class CourseController {
-	public constructor(private readonly exampleService: CourseService) {}
+	public constructor(private readonly courseService: CourseService) {}
 
 	@Post()
 	public create(@Body() data: V1CreateCourseInputSchema) {
-		return this.exampleService.create(data);
+		return this.courseService.create(data);
 	}
 
 	@Get("/find")
 	public find(@Query() data: V1FindCourseInputSchema) {
-		return this.exampleService.find(data);
+		return this.courseService.find(data);
 	}
 
 	@Get("/:courseId")
-	public findOne(@Param("courseId") courseId?: string) {
-		return this.exampleService.findOne({ courseId });
+	public findOne(@Param("courseId") courseId: string) {
+		return this.courseService.findOne({ courseId });
 	}
 }

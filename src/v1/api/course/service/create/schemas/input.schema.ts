@@ -1,20 +1,14 @@
 import { ResourceTypeEnum } from "v1/enums/resource-type";
 import { SeniorityEnum } from "v1/enums/seniority";
 
-class V1CreateCourseEpisodeQuizAnswerInputSchema {
-	public id: string;
-
-	public answer: string;
-}
-
 class V1CreateCourseEpisodeQuizInputSchema {
 	public question: string;
 
 	public shortDescription: string;
 
-	public rightAnswerId: string;
+	public rightAnswerIndex: number;
 
-	public answers: Array<V1CreateCourseEpisodeQuizAnswerInputSchema>;
+	public answers: Array<string>;
 }
 
 class V1CreateCourseEpisodeResourceInputSchema {

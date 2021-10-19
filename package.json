@@ -10,7 +10,8 @@
 		"@nestjs/core": "^8.0.0",
 		"@nestjs/platform-express": "^8.1.1",
 		"@techmmunity/symbiosis": "^0.0.12",
-		"@techmmunity/symbiosis-nestjs": "^0.0.3",
+		"@techmmunity/symbiosis-dynamodb": "^0.0.6",
+		"@techmmunity/symbiosis-nestjs": "^0.0.4",
 		"@techmmunity/utils": "^1.1.0",
 		"@vendia/serverless-express": "^4.5.2",
 		"aws-lambda": "^1.0.6",
@@ -68,8 +69,9 @@
 		"dev": "env-cmd serverless offline",
 		"test": "jest",
 		"test:cov": "jest --coverage",
+		"ts-node": "ts-node",
 		"update-dependencies": "yarn upgrade-interactive --latest",
 		"temp:test-tsc": "tsc",
-		"husky:pre-commit": "tsc && yarn lint"
+		"husky:pre-commit": "rimraf dist && tsc && yarn lint"
 	}
 }

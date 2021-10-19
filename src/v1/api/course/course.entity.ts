@@ -6,7 +6,6 @@ import {
 	SaveDateColumn,
 	UpdateDateColumn,
 } from "@techmmunity/symbiosis";
-import { EpisodeEntity } from "./episode";
 import { SeniorityEnum } from "v1/enums/seniority";
 
 @Entity()
@@ -22,6 +21,12 @@ export class CourseEntity {
 
 	@Column()
 	public previewImageUrl?: string;
+
+	@Column()
+	public workload: number;
+
+	@Column()
+	public quizCount: number;
 
 	@Column({
 		type: String,
@@ -66,14 +71,8 @@ export class CourseEntity {
 	@Column(String)
 	public tags: Array<string>;
 
-	/**
-	 *
-	 * SubEntities
-	 *
-	 */
-
-	@Column(EpisodeEntity)
-	public episodes: Array<EpisodeEntity>;
+	@Column(String)
+	public episodesIds: Array<string>;
 }
 
 export type CourseRepository = Repository<CourseEntity>;

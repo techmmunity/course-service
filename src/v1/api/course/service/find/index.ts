@@ -1,7 +1,7 @@
-import { CourseRepository } from "v1/entities/course";
 import { V1FindCourseInputSchema } from "./schemas/input.schema";
 
 import { validate } from "./validate";
+import { CourseRepository } from "v1/api/course/course.entity";
 
 interface Injectables {
 	courseRepository: CourseRepository;

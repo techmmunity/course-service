@@ -1,17 +1,17 @@
-import { CourseRepository } from "v1/entities/course";
 import { V1FindOneCourseInputSchema } from "./schemas/input.schema";
-import { getQuizCount } from "../../helpers/get-quiz-count";
-import { getWorkload } from "../../helpers/get-workload";
 
 import { getCoursesData } from "./helpers/get-courses-data";
 import { validate } from "./validate";
+import { CourseRepository } from "v1/api/course/course.entity";
+import { EpisodeRepository } from "v1/api/episode/entities/episode.entity";
 
 interface Injectables {
 	courseRepository: CourseRepository;
+	episodeRepository: EpisodeRepository;
 }
 
 export const findOne = async (
-	{ courseRepository }: Injectables,
+	{ courseRepository, episodeRepository }: Injectables,
 	params: V1FindOneCourseInputSchema,
 ) => {
 	const { courseId } = await validate(params);
@@ -31,14 +31,27 @@ export const findOne = async (
 			"releasedAt",
 			"toolkit",
 			"tags",
-			"episodes",
+			"workload",
+			"quizCount",
 		],
 	});
 
-	const coursesData = await getCoursesData({
-		course,
-		courseRepository,
-	});
+	if (!course) {
+		throw new Error("Course not found");
+	}
+
+	const [episodes, coursesData] = await Promise.all([
+		episodeRepository.find({
+			where: {
+				courseId,
+			},
+			select: ["name", "id", "video.previewImageUrl"],
+		}),
+		getCoursesData({
+			course,
+			courseRepository,
+		}),
+	]);
 
 	return {
 		id: course.id,
@@ -49,13 +62,14 @@ export const findOne = async (
 		releasedAt: course.releasedAt,
 		toolkit: course.toolkit,
 		tags: course.tags,
-		workload: getWorkload(course.episodes),
-		quizCount: getQuizCount(course.episodes),
+		workload: course.workload,
+		quizCount: course.quizCount,
 		mustKnowBefore: course.mustKnowBefore?.map(subCourseId =>
 			coursesData.find(subCourse => subCourse.id === subCourseId),
 		),
 		whereToGoAfter: course.whereToGoAfter?.map(subCourseId =>
 			coursesData.find(subCourse => subCourse.id === subCourseId),
 		),
+		episodes,
 	};
 };
